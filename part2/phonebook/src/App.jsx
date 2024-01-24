@@ -21,11 +21,9 @@ const App = () => {
   }
 
   const handleNameChange = (event) => {
-    console.log(event.target.value)
     setNewName(event.target.value)
   }
   const handleNumberChange = (event) => {
-    console.log(event.target.value)
     setNewNumber(event.target.value)
   }
   const handleSearchChange = (event) => {
@@ -36,8 +34,8 @@ const App = () => {
   return (
     <div>
       <Message text={"PhoneBook"} />
-      <SearchBar handleSearchChange={handleSearchChange}/>
-      <Message text={"Add new PhoneBook Entry"}/>
+      <SearchBar handleSearchChange={handleSearchChange} />
+      <Message text={"Add new PhoneBook Entry"} />
       <AddNewPerson
         addPerson={addPerson}
         newName={newName}
@@ -45,40 +43,29 @@ const App = () => {
         handleNameChange={handleNameChange}
         handleNumberChange={handleNumberChange}
       />
-      <Message text={"Numbers"}/>
-      {
-        persons.length === 0 ?
-          <div>
-            ...
-          </div>
-          :
-          persons.map((person) => {
-            return (
-              <div key={person.name}>
-                {person.name} {person.number}
-              </div>
-            )
-          })
-      }
+      <Message text={"Numbers"} />
+      <DisplayPersons persons={persons}/>
     </div>
   )
 }
 
 const Message = ({ text }) => <h2>{text}</h2>
 
-const SearchBar = ({handleSearchChange}) => <div> filter shown with <input onChange={handleSearchChange}/> </div>
+const SearchBar = ({ handleSearchChange }) => <div> filter shown with <input id={"filter"} onChange={handleSearchChange} /> </div>
 
 const AddNewPerson = (props) => {
   const { addPerson, newName, newNumber, handleNameChange, handleNumberChange } = props;
   return (
-    <form onSubmit={addPerson}>
+    <form id={"addPerson"} onSubmit={addPerson}>
       <div>
         name: <input
+          id={"addName"}
           value={newName}
           onChange={handleNameChange} />
       </div>
       <div>
         number: <input
+          id={"addNumber"}
           type='tel'
           value={newNumber}
           onChange={handleNumberChange} />
@@ -90,6 +77,22 @@ const AddNewPerson = (props) => {
   )
 }
 
+const DisplayPerson = ({person}) => <div key={person.name}> {person.name} {person.number} </div>
 
+const DisplayPersons = ({ persons }) => {
+  return (
+    <div>
+      {persons.length === 0 ? (
+        <div>
+          ...
+        </div>
+      ) : (
+        persons.map((person) => (
+          <DisplayPerson key={person.name} person={person} />
+        ))
+      )}
+    </div>
+  );
+};
 
 export default App
