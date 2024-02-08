@@ -1,0 +1,9 @@
+POST http://localhost:3003/api/blogs
+content-type: application/json
+
+{
+    "title": "X, formerly Twitter, becomes No. 1 app on U.S. App Store on news of Tucker Carlson-Putin interview",
+    "author": "Sarah Perez",
+    "url": "https://techcrunch.com/2024/02/07/x-formerly-twitter-becomes-no-1-app-on-u-s-app-store-on-news-of-tucker-carlson-putin-interview/",
+    "likes": 5
+}
